@@ -48,6 +48,11 @@ namespace Bussiness.Concrete
             return new SuccessDataResult<List<Customer>>(_customerDal.GetAll().ToList(), "Müşteriler Listelendi");
         }
 
+        public IDataResult<Customer> GetCustomerById(int id)
+        {
+            return new SuccessDataResult<Customer>(_customerDal.Get(x => x.Id == id));
+        }
+
         public IResult UpdateCustomer(Customer customer)
         {
             if (customer == null)

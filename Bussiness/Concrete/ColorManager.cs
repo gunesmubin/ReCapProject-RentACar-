@@ -41,10 +41,7 @@ namespace Bussiness.Concrete
             return new SuccessDataResult<List<Color>>(_colorDal.GetAll().ToList(),Messages.ColorListed);
         }
 
-        public IDataResult<List<Color>> GetColorsByColorId(int id)
-        {
-            return new SuccessDataResult<List<Color>>(_colorDal.GetAll().Where(x => x.Id == id).ToList(),Messages.ColorListed);
-        }
+
 
         public IResult UpdateColor(Color color)
         {
@@ -53,6 +50,11 @@ namespace Bussiness.Concrete
                 _colorDal.Update(color);
             }
             return new SuccessResult(Messages.ColorUpdated);
+        }
+
+        IDataResult<Color> IColorService.GetColorsByColorId(int id)
+        {
+            return new SuccessDataResult<Color>(_colorDal.Get(x => x.Id == id), Messages.ColorListed);
         }
     }
 }

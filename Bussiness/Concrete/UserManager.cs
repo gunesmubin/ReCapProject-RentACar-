@@ -48,6 +48,12 @@ namespace Bussiness.Concrete
             return new SuccessDataResult<List<User>>(_UserDal.GetAll().ToList(), "Kullanıcılar Listelendi");
         }
 
+        public IDataResult<User> GetUserById(int id)
+        {
+            var result = _UserDal.Get(x=>x.Id==id);
+            return new SuccessDataResult<User>(result);
+        }
+
         public IResult UpdateUser(User User)
         {
             if (User == null)

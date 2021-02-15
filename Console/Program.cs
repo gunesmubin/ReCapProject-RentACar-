@@ -24,6 +24,8 @@ namespace Console
             System.Console.WriteLine(addCustomerRes.Message);
 
 
+
+
             UserManager userManager = new UserManager(new EfUserDal());
             var addUserRes = userManager.AddUser(new User {FirstName="Hasan",LastName="Mutlu",Email="hmutlu@aaa.com",Password="123456" });
             System.Console.WriteLine(addUserRes.Message);

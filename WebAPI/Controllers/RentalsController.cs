@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Bussiness.Abstract;
 using Bussiness.Constands;
-using DataAccess.Results;
+using Core.Utilities.Results;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -43,5 +43,8 @@ namespace Bussiness.Constands
         public static string UserDeleted = "Kullanıcı Bilgisi Silindi";
         public static string UserUpdated = "Kullanıcı Bilgisi Güncellendi";
         public static string UserIsEmpty = "Kullanıcı Bilgisini Hatalı";
+        public static string UserNotFound = "Kullanıcı Bilgisini Bulunamadı";
+        public static string PasswordError = "Hatalı Şifre";
+        public static string UserAlReadyExists= "UserAlReadyExists";
     }
 }

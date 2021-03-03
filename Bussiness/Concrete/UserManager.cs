@@ -1,21 +1,22 @@
 ﻿using Bussiness.Abstract;
 using Bussiness.Constands;
 using DataAccess.Abstract;
-using DataAccess.Results;
+using Core.Utilities.Results;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Core.Entities.Concrete;
 
 namespace Bussiness.Concrete
 {
     public class UserManager : IUserService
     {
-        IUserDal _UserDal;
+        IUserDal _userDal;
         public UserManager(IUserDal UserDal)
         {
-            _UserDal = UserDal;
+            _userDal = UserDal;
         }
         public IResult AddUser(User User)
         {
@@ -25,7 +26,7 @@ namespace Bussiness.Concrete
             }
             else
             {
-                _UserDal.Add(User);
+                _userDal.Add(User);
             }
             return new SuccessResult(Messages.UserAdded);
         }
@@ -38,19 +39,31 @@ namespace Bussiness.Concrete
             }
             else
             {
-                _UserDal.Delete(User);
+                _userDal.Delete(User);
             }
             return new SuccessResult(Messages.UserDeleted);
         }
 
         public IDataResult<List<User>> GetAllUser()
         {
-            return new SuccessDataResult<List<User>>(_UserDal.GetAll().ToList(), "Kullanıcılar Listelendi");
+            return new SuccessDataResult<List<User>>(_userDal.GetAll().ToList(), "Kullanıcılar Listelendi");
         }
+
+        public IDataResult<User> GetByEmail(string email)
+        {
+            var result = _userDal.Get(x => x.Email == email);
+            return new SuccessDataResult<User>(result);
+        }
+
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
+        {
+            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
+        }
+         
 
         public IDataResult<User> GetUserById(int id)
         {
-            var result = _UserDal.Get(x=>x.Id==id);
+            var result = _userDal.Get(x=>x.Id==id);
             return new SuccessDataResult<User>(result);
         }
 
@@ -62,7 +75,7 @@ namespace Bussiness.Concrete
             }
             else
             {
-                _UserDal.Update(User);
+                _userDal.Update(User);
             }
             return new SuccessResult(Messages.UserUpdated);
         }
